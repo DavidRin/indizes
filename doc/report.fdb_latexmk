@@ -1,0 +1,23 @@
+# Fdb version 4
+["pdflatex"] 1790503968.95944 "/home/dr/Schreibtisch/indizes/report.tex" "report.pdf" "report" 1790503969.28837 0
+  "/etc/texmf/web2c/texmf.cnf" 1789543387.3162 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/home/dr/Schreibtisch/indizes/report.tex" 1790503968.33104 78 3f2d7fa373764e7468991e077f51acfd ""
+  "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1248133631 32080 340ef9bf63678554ee606688e7b5339d ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/article.cls" 1738182759 20144 63d8bacaf52e5abf4db3bc322373e1d4 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo" 1738182759 8448 5cf247d4bd0c7d5d711bbbdf111fae2e ""
+  "/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def" 1716410060 29785 9f93ab201fe5dd053afcc6c1bcf7d266 ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1741904018 41538 c016915c1d51223b6dbbfe27341748a8 ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1741904018 41538 c016915c1d51223b6dbbfe27341748a8 ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1790503089 5467255 9a64d1b40e0b893fc5588ecce9d8accf ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1790503246 3347549 c60d882b34ce05602d85727e1e6d6b5e ""
+  "report.aux" 1790503969.26304 131 47b8cec140afed3276eaa39df3ce4795 "pdflatex"
+  "report.tex" 1790503968.33104 78 3f2d7fa373764e7468991e077f51acfd ""
+  (generated)
+  "report.aux"
+  "report.log"
+  "report.pdf"
+  (rewritten before read)
