@@ -5,7 +5,11 @@
 .timer on
 
 --todo Streuung analysieren
-WITH
+WITH namenshaeufigkeiten AS (
+    SELECT vorname, COUNT(*) AS anzahl
+    From personen
+    GROUP BY vorname
+)
 
 
 --Abfrage
