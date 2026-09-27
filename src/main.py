@@ -1,6 +1,8 @@
 import sqlite3
 from faker import Faker
 # Faker initialisieren + sprachauswahl
+
+
 fake = Faker('de_DE')
 
 db_name = 'personen.db'
@@ -33,3 +35,4 @@ for i in range(0,TOTAL_RECORDS,BATCH_SIZE):
     conn.commit()
 
 conn.close()    
+
