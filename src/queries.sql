@@ -60,11 +60,20 @@ PRAGMA page_size;-- Produkt dieser 2 Werte  ergibt Speicher in Byte
 
 
 --index erstellen
-CREATE INDEX idx_bias_vorname ON personen(vorname);
-
 SELECT COUNT(*) FROM personen WHERE vorname = 'Peter';
---Run Time: real 0.000 user 0.000379 sys 0.000000
+
+--Run Time: real 0.108 user 0.098165 sys 0.010012
 
 
 SELECT COUNT(*) FROM personen WHERE vorname = 'Simon';
---Run Time: real 0.039 user 0.038860 sys 0.000000
+-- Run Time: real 0.131 user 0.128817 sys 0.002928
+
+CREATE INDEX idx_bias_vorname ON personen(vorname);
+
+SELECT COUNT(*) FROM personen WHERE vorname = 'Peter';
+--Run Time: real 0.001 user 0.000391 sys 0.000038
+
+
+SELECT COUNT(*) FROM personen WHERE vorname = 'Simon';
+--Run Time: real 0.050 user 0.049327 sys 0.000504
+
