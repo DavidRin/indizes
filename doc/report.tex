@@ -1,341 +1,137 @@
 
-% ============================================================
-% DOKUMENTKLASSE
-% ============================================================
-
-% \documentclass legt die Grundart des Dokuments fest.
-% "article" ist für kürzere wissenschaftliche Arbeiten,
-% Berichte und Dokumentationen geeignet.
 \documentclass{article}
 
-
-% ============================================================
-% PAKETE
-% ============================================================
-
-% inputenc ermöglicht die Verwendung von UTF-8-Zeichen,
-% z. B. ä, ö, ü und ß.
-% Bei aktuellen LaTeX-Versionen ist UTF-8 bereits Standard,
-% der Befehl kann aber zur Verdeutlichung stehen bleiben.
+% Sprach- und Zeichencodierung
 \usepackage[utf8]{inputenc}
-
-% fontenc sorgt dafür, dass Sonderzeichen korrekt
-% in der verwendeten Schrift kodiert werden.
-% T1 ist für europäische Sprachen geeignet.
 \usepackage[T1]{fontenc}
-
-% babel passt das Dokument an die deutsche Sprache an.
-% Dadurch werden z. B. Überschriften und Trennungen
-% automatisch auf Deutsch angepasst.
 \usepackage[ngerman]{babel}
 
-% amsmath stellt zusätzliche Funktionen für mathematische
-% Formeln und mathematische Umgebungen zur Verfügung.
+% Mathematische Symbole und Einheiten
 \usepackage{amsmath}
-
-% amssymb stellt zusätzliche mathematische Symbole bereit.
 \usepackage{amssymb}
 
-% geometry ermöglicht die Einstellung der Seitenränder.
-% a4paper = Papierformat DIN A4
-% margin=2.5cm = 2,5 cm Rand auf allen Seiten
+% Seitenlayout
 \usepackage[a4paper,margin=2.5cm]{geometry}
 
-
-% ============================================================
-% BEGINN DES DOKUMENTS
-% ============================================================
-
-% \begin{document} markiert den Beginn des eigentlichen
-% Dokuments. Alles davor gehört zum sogenannten Vorspann.
 \begin{document}
 
-
-% ============================================================
-% TITELBEREICH
-% ============================================================
-
-% \title definiert den Titel des Dokuments.
 \title{Analyse von Datenbank-Performance, Streuung und Indizierung}
-
-% \author definiert den Autor.
 \author{David Rinner}
-
-% \date definiert das Datum.
-% \today setzt automatisch das aktuelle Datum ein.
 \date{\today}
 
-% \maketitle erzeugt den zuvor definierten Titel,
-% Autor und das Datum im Dokument.
 \maketitle
 
-
-% ============================================================
-% ABSCHNITT 1
-% ============================================================
-
-% \section erstellt eine nummerierte Überschrift.
 \section{Einleitung und Methodik}
 
 Ziel dieser Analyse ist die Untersuchung des Verhaltens von
-
-SQLite-Datenbanken bei großen Datenmengen
-% $ ... $ öffnet und schließt den sogenannten Mathematikmodus.
-% \geq bedeutet "größer oder gleich".
-% \, erzeugt einen kleinen horizontalen Abstand.
-% 500\,000 sorgt dafür, dass 500 und 000 nicht unschön
-% auseinandergerissen werden.
-($\geq 500\,000$ Datensätzen).
-
+SQLite-Datenbanken bei großen Datenmengen ($\geq 500\,000$ Datensätze).
 Dabei wurden die Streuung von Zufallsdaten, die mithilfe von Python und
-
-% \texttt{...} stellt Text in einer Schreibmaschinenschrift dar.
-% Besonders geeignet für Programmcode, Dateinamen und Befehle.
 \texttt{Faker} generiert wurden, die Auswirkungen von Indizes auf die
-
 Performance sowie der Einfluss eines Daten-Bias untersucht.
-
-
-% ============================================================
-% ABSCHNITT 2
-% ============================================================
 
 \section{Streuungsanalyse der Zufallsdaten}
 
 Da Namen keine Distanz im herkömmlichen Sinne besitzen, lässt sich ihre
-
 Streuung nicht direkt über geometrische Abstände bestimmen.
-
-Stattdessen wird die Streuung über die
-% \textbf{...} stellt den enthaltenen Text fett dar.
-\textbf{Häufigkeitsverteilung der Vornamen} definiert.
+Stattdessen wird die Streuung über die \textbf{Häufigkeitsverteilung der
+Vornamen} definiert.
 
 Jeder Vorname wird dabei als Kategorie betrachtet, deren Häufigkeit über
-
 alle Datensätze hinweg gezählt wird.
 
-
-% ============================================================
-% AUFZÄHLUNG
-% ============================================================
-
-% \begin{itemize} beginnt eine Aufzählung.
 \begin{itemize}
-
-    % \item erzeugt einen einzelnen Aufzählungspunkt.
-
-    \item \textbf{Durchschnittliche Häufigkeit:}
-    $\approx 249{,}75$
-
+    \item \textbf{Durchschnittliche Häufigkeit:} $\approx 249{,}75$
     Vorkommen pro Vorname.
-
-    % \approx bedeutet "ungefähr gleich".
-    % {,} sorgt dafür, dass das Komma im Mathematikmodus
-    % als normales Komma dargestellt wird.
-
-    \item \textbf{Varianz der Häufigkeiten:}
-    $267{,}28$
-
+    
+    \item \textbf{Varianz der Häufigkeiten:} $267{,}28$
     (Standardabweichung $\sigma \approx 16{,}35$).
-
-    % \sigma erzeugt den griechischen Buchstaben σ.
-    % \approx erzeugt das Zeichen ≈.
-
-% \end{itemize} beendet die Aufzählung.
 \end{itemize}
 
 Die geringe Varianz zeigt, dass die verwendete Bibliothek
-
 \texttt{Faker} die Vornamen relativ gleichmäßig über die Datensätze
-
 verteilt.
-
-
-% ============================================================
-% ABSCHNITT 3
-% ============================================================
 
 \section{Performance und Speicherbedarf mit und ohne Index}
 
-Ohne Index muss die Datenbank bei einer Abfrage
-
+Ohne Index muss die Datenbank bei einer Abfrage 
 die gesamte Tabelle durchsuchen und benötigt in der vorliegenden
-
 Messung etwa $0{,}178\,\mathrm{s}$.
 
-% \mathrm{...} sorgt dafür, dass "s" als normale Einheit
-% und nicht als mathematische Variable dargestellt wird.
-%
-% $0{,}178\,\mathrm{s}$
-% bedeutet:
-% 0,178 Sekunden.
-
-
-Nach der Erstellung eines Indexes
-
-sinkt die Abfragezeit auf etwa $0{,}001\,\mathrm{s}$.
-Dadurch wird die Abfrage in diesem Beispiel deutlich beschleunigt.
-
-
-% ============================================================
-% SPEICHERBEDARF
-% ============================================================
+Nach der Erstellung eines Indexes 
+sinkt die Abfragezeit auf etwa $0{,}001\,\mathrm{s}$. Dadurch wird die
+Abfrage in diesem Beispiel deutlich beschleunigt.
 
 Dieser Geschwindigkeitsgewinn geht jedoch mit einem erhöhten
-
 Speicherbedarf einher. Während die Datenbank vor der Erstellung des
-
-Indexes
-
-$11\,755\,520\,\mathrm{Byte}$
-
+Indexes $11\,755\,520\,\mathrm{Byte}$ 
 beanspruchte, steigt der Speicherbedarf nach dem Aufbau des
-
-B-Tree-Indexes auf
-
-$19\,578\,880\,\mathrm{Byte}$.
-
-% \, erzeugt einen kleinen Abstand zwischen Zahlenblöcken.
-%
-% Beispiel:
-% 11\,755\,520
-%
-% wird typografisch besser dargestellt als:
-% 11 755 520
-
+B-Tree-Indexes auf $19\,578\,880\,\mathrm{Byte}$.
 
 Der zusätzliche Speicherbedarf entsteht dadurch, dass neben der
-
 eigentlichen Tabelle eine zusätzliche Indexstruktur gespeichert werden
-
 muss.
-
-
-% ============================================================
-% ABSCHNITT 4
-% ============================================================
 
 \section{Untersuchung der Biased Database}
 
 Wird die Verteilung der Vornamen gezielt verändert, sodass
-
 50\,\% aller Datensätze denselben Vornamen (\texttt{Simon}) tragen,
-
 verändert sich die Geschwindigkeit der Suche.
-
-% \% erzeugt das Prozentzeichen.
-% Das einfache "%" wäre in LaTeX ein Kommentarzeichen.
-%
-% Deshalb muss man schreiben:
-% 50\,\%
-%
-% \, = kleiner Abstand
-% \% = Prozentzeichen
-
-
-% ============================================================
-% AUFZÄHLUNG
-% ============================================================
 
 \begin{itemize}
 
     \item \textbf{Seltener Wert (\texttt{Peter}):}
 
     Wird nach einem selten vorkommenden Namen gesucht, kann der Index
-
     die passenden Datensätze sehr schnell finden. In der Messung wurde
-
     eine Abfragezeit von etwa $0{,}001\,\mathrm{s}$ erreicht.
-
 
     \item \textbf{Häufiger Wert (\texttt{Simon}):}
 
     Da \texttt{Simon} in 50\,\% der Datensätze vorkommt, muss die
-
     Datenbank sehr viele passende Datensätze finden. Dadurch ist die
-
     Suche mit dem Index langsamer als bei einem seltenen Namen.
-
     Mit Index benötigt die Abfrage etwa $0{,}050\,\mathrm{s}$,
-
     während ohne Index etwa $0{,}131\,\mathrm{s}$ benötigt werden.
 
 \end{itemize}
 
-
-% ============================================================
-% ERKLÄRUNG DES VERHALTENS
-% ============================================================
-
-% \textbf{} wird verwendet, um eine Überschrift innerhalb
-% eines normalen Absatzes fett darzustellen.
 \textbf{Grund für dieses Verhalten:}
 
 Der Unterschied liegt darin, wie oft ein bestimmter Name in der
-
 Datenbank vorkommt. Bei einem seltenen Namen wie \texttt{Peter} gibt
-
 es nur wenige passende Datensätze. Der Index kann diese daher schnell
-
 finden.
 
 Bei \texttt{Simon} sieht es anders aus: Der Name kommt in der Hälfte
-
 aller Datensätze vor. Bei insgesamt $500\,000$ Datensätzen sind das
-
 ungefähr $250\,000$ Treffer. Der Index muss deshalb deutlich mehr
-
 passende Einträge verarbeiten.
 
 Trotzdem ist die Suche mit dem Index in diesem Beispiel noch schneller
-
 als die Suche ohne Index. Das zeigt, dass ein Index besonders bei
-
 selten vorkommenden Werten hilfreich ist. Bei sehr häufig vorkommenden
-
 Werten fällt der Vorteil dagegen kleiner aus.
 
-
-% ============================================================
-% ABSCHNITT 5
-% ============================================================
 
 \section{Fazit}
 
 Die Untersuchung zeigt, dass die Verwendung eines Indexes bei großen
-
 Datenmengen einen erheblichen Einfluss auf die Abfragegeschwindigkeit
-
-haben kann. Besonders bei Suchbegriffen
-
+haben kann. Besonders bei Suchbegriffen 
 mit selten vorkommenden Werten ist der Geschwindigkeitsgewinn deutlich.
 
 Gleichzeitig erhöht ein Index den Speicherbedarf der Datenbank, da
-
 zusätzliche Strukturen angelegt und verwaltet werden müssen.
 
 Die Untersuchung der \texttt{bias.db} zeigt außerdem, dass die
-
 Verteilung der Daten einen wesentlichen Einfluss auf die Effektivität
-
 eines Indexes hat. Bei häufig vorkommenden Werten ist der Vorteil eines
-
 Indexes geringer als bei seltenen Werten.
 
 Damit wird deutlich, dass bei der Optimierung von Datenbanken nicht
-
 nur die Anzahl der Datensätze, sondern auch deren Verteilung und die
-
 Selektivität der verwendeten Suchbedingungen berücksichtigt werden
-
 müssen.
 
-
-% ============================================================
-% ENDE DES DOKUMENTS
-% ============================================================
-
-% \end{document} beendet das LaTeX-Dokument.
-% Alles danach wird von LaTeX nicht mehr zum Dokument gezählt.
 \end{document}
 
